@@ -1,63 +1,49 @@
 function makeSound(event){
     key = (String.fromCharCode(event.keyCode));
+    key = key.toLowerCase();
     switch(key){
-        case 'W':
+        case 'w':
             var sound = new Audio("sounds/tom-1.mp3");
             sound.play();
             break;
-        case 'A':
+        case 'a':
             var sound = new Audio("sounds/tom-2.mp3");
             sound.play();
             break;
-        case 'S':
+        case 's':
             var sound = new Audio("sounds/tom-3.mp3");
             sound.play();
             break;
-        case 'D':
+        case 'd':
             var sound = new Audio("sounds/tom-4.mp3");
             sound.play();
             break; 
-        case 'J':
+        case 'j':
             var sound = new Audio("sounds/crash.mp3");
             sound.play();
             break;
-        case 'K':
+        case 'k':
             var sound = new Audio("sounds/snare.mp3");
             sound.play();
             break;
-        case 'L':
+        case 'l':
             var sound = new Audio("sounds/kick-bass.mp3");
             sound.play();
             break;
     }
+    buttonAnimation(key);
     
 }
 
-function onKeyDownHandler(event) {
+document.addEventListener("keypress", function(event){
+    makeSound(event);
+})
 
-    var codigo = event.which || event.keyCode;
-    console.log("Codigo", event.keyCode)
-
-    console.log("Presionada: " + codigo);
-     
-    if(codigo === 13){
-      console.log("Tecla ENTER");
-    }
-
-    if(codigo >= 65 && codigo <= 90){
-      console.log(String.fromCharCode(codigo));
-    }
-
-     
+function buttonAnimation(currentKey){
+    var activeButton = document.querySelector("." + currentKey);
+    activeButton.classList.add("pressed");
+    setTimeout(function(){
+        activeButton.classList.remove("pressed")
+    }, 100)
 }
 
-var drums = document.querySelectorAll(".drum");
-var numOfDrums = drums.length;
-
-/*for(var i = 0; i<numOfDrums; i++){
-    
-    drums[i].addEventListener("click", function(){
-        var keyPressed = drums[i].innerHTML;
-        drums[i].makeSound(keyPressed)
-    });
-}*/
